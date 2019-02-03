@@ -1,0 +1,42 @@
+body {
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+table {
+    width: 80%;
+    margin: auto;
+    background-color: white;
+    border: 1px solid #008CBA;
+    box-shadow: 4px 4px 4px #999999;
+}
+
+tr:nth-child(even) {
+    background: white;
+}
+
+tr:nth-child(odd) {
+    background: #e8e8e8;
+}
+
+th {
+    background-color: #008CBA;
+    color: white;
+    padding: 5px;
+    padding-left: 12px;
+    font-size: medium;
+}
+
+td {
+    padding: 5px;
+    padding-left: 12px;
+}
+
+td a:link {
+    color: #008CBA;
+}
+
+td a:visited {
+    color: #800080;
+}
+
