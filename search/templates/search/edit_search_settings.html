@@ -1,0 +1,71 @@
+{% extends "search/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="panel panel-default panel-edit-search-settings">
+        <div class="panel-heading"
+             style="color: white; font-weight: bold; background-color: #008CBA; background-image: none;">
+            <h3 class="panel-title">Edit Search Settings</h3>
+        </div>
+        <div class="panel-body">
+            <form method="POST" class="post-form">{% csrf_token %}
+                <table class="edit_settings" width="100%">
+                    <tbody>
+                    <tr>
+                        <td><label for="interval">{{ form.interval.label }}</label></td>
+                        <td>{{ form.interval.errors }}<input id="interval"
+                                                             class="edit_settings edit_settings_inputs_line_up_on_right"
+                                                             name="interval" type="number"
+                                                             min="1" max="1440"
+                                                             value="{{ search_interval }}"
+                                                             title="How frequently (in minutes) would you like the search to refresh?"
+                                                             required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="site">Craigslist site to search (for example, <i>sfbay</i> or <i>newyork</i>
+                            &ndash; see <a href="https://www.craigslist.org/about/sites">craigslist.org/about/sites</a>):</label>
+                        </td>
+                        <td>{{ form.site.errors }}<input id="site"
+                                                         class="edit_settings edit_settings_inputs_line_up_on_right"
+                                                         name="site" type="text"
+                                                         pattern=".*\S.*"
+                                                         value="{{ search_site }}"
+                                                         title="Which Craigslist site would you like to search?"
+                                                         required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="zip_code">{{ form.zip_code.label }}</label></td>
+                        <td>{{ form.zip_code.errors }}<input id="zip_code"
+                                                             class="edit_settings edit_settings_inputs_line_up_on_right"
+                                                             name="zip_code" type="text"
+                                                             value="{{ search_zip_code }}"
+                                                             pattern="^\d{5}$"
+                                                             title="What zip code would you like the search to be centered on?"
+                                                             required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="radius">{{ form.radius.label }}</label></td>
+                        <td>{{ form.radius.errors }}<input id="radius"
+                                                           class="edit_settings edit_settings_inputs_line_up_on_right"
+                                                           name="radius" type="number"
+                                                           min="1" max="1000"
+                                                           value="{{ search_radius }}"
+                                                           title="How large a radius (in miles) would you like the search to include?"
+                                                           required/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="search_terms">{{ form.search_terms.label }}</label></td>
+                        <td>{{ form.search_terms.errors }}<textarea id="search_terms"
+                                                                    class="edit_settings edit_settings_inputs_line_up_on_right"
+                                                                    name="search_terms"
+                                                                    maxlength="5000"
+                                                                    title="What items would you like to search Craigslist for?"
+                                                                    required>{{ search_terms }}</textarea></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="text-align: center;"><input type="submit" name="Update" value="Update"/>&nbsp;&nbsp;<input
+                        type="submit" value="Cancel" name="Cancel" formnovalidate/></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

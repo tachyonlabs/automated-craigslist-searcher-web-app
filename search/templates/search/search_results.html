@@ -1,70 +1,37 @@
-<!DOCTYPE html>
+{% extends "search/base.html" %}
 {% load static %}
-<script type="text/javascript">
-    // Get the current search time, and automatically search again every fifteen minutes
-    now = new Date();
-    var nowString = now.toLocaleTimeString();
-    msInFifteenMinutes = now.getMilliseconds() + 1000 * 60 * 15;
-    setTimeout('location.reload(true)', msInFifteenMinutes);
-</script>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Craigslist Search Results</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body role="document" style="background-image: url({% static 'logo.svg' %});">
-<nav class="navbar navbar-inverse navbar-static-top"
-     style="background-color: #008CBA; border-bottom-color: #008CBA; background-image: none">
-    <div class="container" style="background-color: #008CBA;">
-        <div class="navbar-header" style="background-color: #008CBA;">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <span class="navbar-brand" style="color: white; font-weight: bold;">Idea Fab Labs Craigslist Search - last checked <script
-                    type="text/javascript">
-        document.write(nowString)
-      </script></span>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li id="edit_search"><a href="" style="color: white;">Edit Search</a></li>
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</nav>
-<p>&nbsp;</p>
-<table>
-    <thead>
-    <tr>
-        <th>Query</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Location</th>
-    </tr>
-    </thead>
-    {% for part in all_results %}
-        {% for result in part.results %}
-            <tr>
-                <td style="font-weight: bold">{% if forloop.first %}
-                    {{ part.query }}
-                {% endif %}</td>
-                <td><a href={{ result.url }}>{{ result.name }}</a></td>
-                <td>{{ result.price }}</td>
-                <td>{{ result.where }}</td>
+{% block content %}
+    <script type="text/javascript">
+        // Get the current search time, and automatically search again after the specified number of minutes
+        now = new Date();
+        let nowString = now.toLocaleTimeString();
+        msInSearchIntervalMinutes = now.getMilliseconds() + 1000 * 60 * {{ search_interval_in_minutes }};
+        setTimeout('location.reload(true)', msInSearchIntervalMinutes);
+    </script>
+    <table class="search-results">
+        <thead>
+        <tr class="search-results">
+            <th class="search-results">Query</th>
+            <th class="search-results">Description</th>
+            <th class="search-results">Price</th>
+            <th class="search-results">Location</th>
+        </tr>
+        </thead>
+        {% for part in all_results %}
+            {% for result in part.results %}
+                <tr class="search-results">
+                    <td class="search-results" style="font-weight: bold">{% if forloop.first %}
+                        {#                        Only show a search term next to its first result, not all its results#}
+                        {{ part.query }}
+                    {% endif %}</td>
+                    <td class="search-results"><a href={{ result.url }}>{{ result.name }}</a></td>
+                    <td class="search-results">{{ result.price }}</td>
+                    <td class="search-results">{{ result.location }}</td>
+                </tr>
+            {% endfor %}
+            <tr class="search-results">
+                <td colspan=4 class="search-results">&nbsp;</td>
             </tr>
         {% endfor %}
-        <tr>
-            <td colspan=4>&nbsp;</td>
-        </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+    </table>
+{% endblock %}

@@ -3,23 +3,26 @@ body {
     background-size: auto;
 }
 
-table {
+table.search-results {
     width: 80%;
-    margin: auto;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: white;
-    border: 1px solid #008CBA;
+    border: 2px solid #008CBA;
     box-shadow: 4px 4px 4px #999999;
 }
 
-tr:nth-child(even) {
+tr.search-results:nth-child(even) {
     background: white;
 }
 
-tr:nth-child(odd) {
+tr.search-results:nth-child(odd) {
     background: #e8e8e8;
 }
 
-th {
+th.search-results {
     background-color: #008CBA;
     color: white;
     padding: 5px;
@@ -27,16 +30,48 @@ th {
     font-size: medium;
 }
 
-td {
+td.search-results {
     padding: 5px;
     padding-left: 12px;
 }
 
-td a:link {
+td.search-results a:link {
     color: #008CBA;
 }
 
-td a:visited {
+td.search-results a:visited {
     color: #800080;
 }
 
+div.panel-edit-search-settings {
+    width: 480px;
+    border-color: #008CBA;
+    border-width: 2px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px #999999;
+}
+
+input[type="submit"] {
+    background-color: #008CBA;
+    border-color: #008CBA;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table.edit_settings {
+    margin-bottom: 10px;
+}
+
+table.edit_settings td {
+    padding: 8px;
+    vertical-align: top;
+}
+
+.edit_settings_inputs_line_up_on_right {
+    width: 200px;
+}

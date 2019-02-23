@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Craigslist Search Results{{ extra_title_text }}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body role="document" style="background-image: url({% static 'logo.svg' %});">
+<nav class="navbar navbar-inverse navbar-static-top"
+     style="background-color: #008CBA; border-bottom-color: #008CBA; background-image: none">
+    <div class="container" style="background-color: #008CBA;">
+        <div class="navbar-header" style="background-color: #008CBA;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" style="color: white; font-weight: bold;" href="{% url 'search_results' %}">Idea
+                Fab Labs Craigslist Search{{ extra_title_text }}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li id="edit_search_settings"><a href="{% url 'edit_search_settings' %}" style="color: white;">Edit
+                    Search Settings</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container-fluid">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>
